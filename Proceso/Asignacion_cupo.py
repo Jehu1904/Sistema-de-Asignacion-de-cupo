@@ -1,25 +1,3 @@
-from politicas.politica_asignacion import PoliticaAsignacion
-from typing import List, Dict
-from modelos.postulante import Postulante
-from modelos.carrera import Carrera
-
-
-class AsignacionCupos:
-    def __init__(self, politica):
-        self.politica = politica
-
-    def ejecutar(self, postulantes, carreras):
-        resultados = {}
-
-        for carrera in carreras:
-            postulantes_carrera = [p for p in postulantes if p.carrera == carrera.nombre]
-            seleccionados = self.politica.asignar(postulantes_carrera, carrera)
-            resultados[carrera.nombre] = seleccionados
-
-        return resultados
-
-#eso
-'''
 class AsignacionCupos:
     """
     Motor del SAC que ejecuta la asignación.
@@ -44,4 +22,27 @@ class AsignacionCupos:
             # 3. Almacenar resultados
             resultados[carrera.nombre] = seleccionados
             
-        return resultados'''
+        return resultados
+    
+'''
+from politicas.politica_asignacion import PoliticaAsignacion
+from typing import List, Dict
+from modelos.postulante import Postulante
+from modelos.carrera import Carrera
+
+
+class AsignacionCupos:
+    def __init__(self, politica):
+        self.politica = politica
+
+    def ejecutar(self, postulantes, carreras):
+        resultados = {}
+
+        for carrera in carreras:
+            postulantes_carrera = [p for p in postulantes if p.carrera == carrera.nombre]
+            seleccionados = self.politica.asignar(postulantes_carrera, carrera)
+            resultados[carrera.nombre] = seleccionados
+
+        return resultados
+
+#eso'''
