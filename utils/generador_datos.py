@@ -76,9 +76,9 @@ def guardar_resultados_en_fichero(resultados_asignacion: Dict[str, List[Postulan
             writer.writeheader() 
             writer.writerows(datos_salida)
             
-        print(f"\n✅ Resultados guardados en: {nombre_fichero}")
+        print(f"\n Resultados guardados en: {nombre_fichero}")
         
     except Exception as e:
         print(f"Error al escribir el fichero de resultados: {e}")
 
-#hola
+#holaa
