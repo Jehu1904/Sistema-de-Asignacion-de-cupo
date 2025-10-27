@@ -27,7 +27,7 @@ class Carrera:
         if self._cupos_asignados < self._cupos_ofertados:
             self._cupos_asignados += 1
             return True
-        return False
+        return False #Si es falsa, significa que la carrera está llena.
     
     def cupos_restantes(self) -> int:
         return self._cupos_ofertados - self._cupos_asignados
@@ -35,13 +35,9 @@ class Carrera:
     def esta_llena(self) -> bool:
         return self._cupos_asignados == self._cupos_ofertados
 
-    def obtener_puntaje_corte(self, postulantes_asignados: List[Postulante]) -> float:
-        if not postulantes_asignados:
-            return 0.0
-
-        puntajes = [p.puntaje for p in postulantes_asignados]
-        return min(puntajes)
-
     def __str__(self) -> str:
         return (f"Carrera: {self.nombre} | Cupos: {self.cupos_ofertados} "
                 f"(Asignados: {self.cupos_asignados})")
+        
+carrera=Carrera("Ingenieria de Sistemas",3)
+print(carrera)
