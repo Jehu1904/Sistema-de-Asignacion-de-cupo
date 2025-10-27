@@ -1,32 +1,38 @@
 from Proceso.Asignacion_cupo import AsignacionCupos 
 from politicas.Politicas_asignacion import PoliticaMeritoAcademico 
-
-# ¡Importación de las funciones de I/O del fichero!
 from utils.generador_datos import (
     obtener_postulantes_desde_fichero, 
     obtener_carreras, 
     guardar_resultados_en_fichero
 )
-
-# ...
-
+#main
 if __name__ == '__main__':
     
-    # 1. El SAC PIDE los datos (Lectura del fichero)
+    print("--- INICIANDO PROCESO SAC ---")
+
     postulantes = obtener_postulantes_desde_fichero()
     carreras = obtener_carreras() 
 
     if not postulantes or not carreras:
-        print("Fallo al cargar datos. Terminando el programa.")
+        print("Fallo al cargar datos. Terminando.")
         exit()
 
-    # 2. Configuración y ejecución del SAC
+    print(f"Datos cargados: {len(postulantes)} postulantes y {len(carreras)} carreras.")
+
     politica = PoliticaMeritoAcademico()
     asignacion = AsignacionCupos(politica)
+
+    print("Ejecutando asignación por Mérito Académico...")
     resultados = asignacion.ejecutar(postulantes, carreras)
 
-    # 3. Guardar Resultados (Escritura en el fichero)
+    for nombre_carrera, seleccionados in resultados.items():
+        print(f"\nCarrera: {nombre_carrera} ({len(seleccionados)} asignados)")
+        if seleccionados:
+            for p in seleccionados:
+                print(f"   -> {p}") 
+        else:
+            print("   -> No hay postulantes asignados.")
+            
     guardar_resultados_en_fichero(resultados)
-
-    # 4. Mostrar Resultados en pantalla (tu código original)
-    # ...
+    
+    print("\n--- PROCESO FINALIZADO ---")
